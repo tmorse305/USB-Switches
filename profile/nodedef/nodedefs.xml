@@ -1,0 +1,350 @@
+<nodeDefs>
+    <nodeDef id="mqctrl" nls="CTRL">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+        </sts>
+        <cmds>
+          <sends>
+            <!-- These are for our heartbeat -->
+            <cmd id="DON" />
+            <cmd id="DOF" />
+          </sends>
+            <accepts>
+                <cmd id="DISCOVER" />
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="MQSW" nls="SWITCH">
+        <editors />
+        <sts>
+            <st id="ST" editor="ONOFF" />
+        </sts>
+        <cmds>
+            <sends>
+	    	<cmd id="DON" />
+	    	<cmd id="DOF" />
+            </sends>
+            <accepts>
+                <cmd id="QUERY" />
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+	<nodeDef id="MQTG" nls="TRIGGER">
+        <editors />
+        <sts>            
+        </sts>
+        <cmds>
+            <sends>	    	
+            </sends>
+            <accepts>                
+                <cmd id="DON" />                
+            </accepts>
+        </cmds>
+    </nodeDef>
+  <nodeDef id="mqdimmer" nls="DIMMER">
+        <editors />
+        <sts>
+            <st id="ST" editor="ST_DIMMER" />
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </sends>
+            <accepts>
+                <cmd id="QUERY" />
+                <cmd id="DON" >
+                    <p id="" editor="ST_DIMMER" optional='T' init='ST' />
+                </cmd>
+                <cmd id="DOF" />
+                <cmd id="BRT" />
+                <cmd id="DIM" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqfan" nls="IFAN">
+        <editors />
+        <sts>
+            <st id="ST" editor="ST_FAN" />
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </sends>
+            <accepts>
+                <cmd id="QUERY" />
+                <cmd id="DON" >
+                    <p id="" editor="ST_FAN" init="ST" />
+                </cmd>
+                <cmd id="DOF" />
+                <cmd id="FDUP" />
+                <cmd id="FDDOWN" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqsens" nls="SENSOR">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="CLITEMP" editor="TEMPF" />
+            <st id="GPV" editor="TEMPF" />
+            <st id="CLIHUM" editor="HUM" />
+            <st id="LUMIN" editor="LIGHT" />
+            <st id="GV0" editor="ONOFF" />
+            <st id="GV1" editor="LEDCLR" />
+            <st id="GV2" editor="LEDCLR" />
+            <st id="GV3" editor="LEDCLR" />
+            <st id="GV4" editor="LEDCLR" />			
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </sends>
+            <accepts>
+                <cmd id="QUERY" />
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="SETLED">
+                    <p id="I" editor="LEDCLR" init="GV1" />
+                    <p id="R" editor="LEDCLR" init="GV2" />
+                    <p id="G" editor="LEDCLR" init="GV3" />
+                    <p id="B" editor="LEDCLR" init="GV4" />
+                    <p id="D" editor="SECOND" />
+                    <p id="F" editor="SECOND" />
+                </cmd>
+            </accepts>
+        </cmds>		
+    </nodeDef>
+	<nodeDef id="mqdrop" nls="DSENSOR">
+        <editors />
+        <sts>
+            <st id="GV5" editor="FLOW" />
+			<st id="GV6" editor="SIGNAL" />
+			<st id="GV7" editor="SERVER" />
+        </sts>
+        <cmds>
+			<sends>
+            </sends>
+            <accepts> 
+				 <cmd id="QUERY" />
+            </accepts>
+        </cmds>		
+    </nodeDef>
+        <nodeDef id="mqflag" nls="FLAG">
+        <editors />
+        <sts>
+            <st id="ST" editor="ST_FLAG" />
+        </sts>
+        <cmds>
+          <sends>
+            <cmd id="RESET" />
+        </sends>
+            <accepts>
+                <cmd id="QUERY" />
+                <cmd id="RESET" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqdht" nls="DHT">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="CLITEMP" editor="TEMPF" />
+            <st id="CLIHUM" editor="HUM" />
+            <st id="DEWPT" editor="DEWF" />
+        </sts>
+	<cmds>
+	    <sends />
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqds" nls="DS">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="CLITEMP" editor="TEMPF" />
+        </sts>
+	<cmds>
+	    <sends />
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqbme" nls="BME">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="CLITEMP" editor="TEMPF" />
+            <st id="CLIHUM" editor="HUM" />
+            <st id="DEWPT" editor="DEWF" />
+            <st id="BARPRES" editor="PRESS" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqhcsr" nls="SR04">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="DISTANC" editor="DIST" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqshflood" nls="FLOOD">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="CLITEMP" editor="TEMPF" />
+            <st id="GV0" editor="BOOL" />
+            <st id="BATLVL" editor="BATTERY" />
+            <st id="GPV" editor="ANALOG" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqanal" nls="ANALOG">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="GPV" editor="ANALOG" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqs31" nls="S31">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+            <st id="CC" editor="CURRENT" />
+            <st id="CPW" editor="CURPOW" />
+            <st id="CV" editor="VOLT" />
+            <st id="PF" editor="FACTOR" />
+            <st id="TPW" editor="TOTPOW" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqr" nls="RAW">
+        <editors />
+        <sts>
+            <st id="ST" editor="ST_FLAG" />
+	    <st id="GV1" editor="ANALOG" />
+        </sts>
+        <cmds>
+            <sends>
+            </sends>
+            <accepts>
+                <cmd id="QUERY" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqrgbw" nls="STRIP">
+        <editors />
+        <sts>
+            <st id="GV0" editor="ONOFF" />
+            <st id="GV1" editor="LEDCLR" />
+            <st id="GV2" editor="LEDCLR" />
+            <st id="GV3" editor="LEDCLR" />
+            <st id="GV4" editor="LEDCLR" />
+            <st id="GV5" editor="LEDCLR" />
+            <st id="GV6" editor="LEDCLR" />
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </sends>
+            <accepts>
+                <cmd id="QUERY" />
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="SETRGBW">
+                    <p id="STRIPI" editor="LEDCLR" init="GV1" />
+                    <p id="STRIPR" editor="LEDCLR" init="GV2" />
+                    <p id="STRIPG" editor="LEDCLR" init="GV3" />
+                    <p id="STRIPB" editor="LEDCLR" init="GV4" />
+                    <p id="STRIPW" editor="LEDCLR" init="GV5" />
+                    <p id="STRIPP" editor="LEDCLR" init="GV6" />
+                </cmd>
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="mqratgdo" nls="RATGDO">
+        <editors />
+        <sts>
+            <st id="ST" editor="GAVAIL" />
+            <st id="GV0" editor="GLIGHT" />
+            <st id="GV1" editor="GDOOR" />
+            <st id="GV2" editor="GMOTION" />
+            <st id="GV3" editor="GLOCK" />
+            <st id="GV4" editor="GOBST" />
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="OPEN" />
+                <cmd id="CLOSE" />
+                <cmd id="STOP" />
+                <cmd id="LOCK" />
+                <cmd id="UNLOCK" />
+                <cmd id="MCLEAR" />
+            </sends>
+            <accepts>
+                <cmd id="QUERY" />
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="OPEN" />
+                <cmd id="CLOSE" />
+                <cmd id="STOP" />
+                <cmd id="LOCK" />
+                <cmd id="UNLOCK" />
+                <cmd id="MCLEAR" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+</nodeDefs>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
