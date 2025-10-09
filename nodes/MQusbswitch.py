@@ -75,7 +75,7 @@ class MQusbswitch(udi_interface.Node):
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
         
         @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')
-    """
+        """
         #async def main(client: Client):
             #print(client.region)
             #print(client.user.info)
@@ -99,7 +99,7 @@ class MQusbswitch(udi_interface.Node):
                 #print("Power on sent")
             #except DeviceOffline:
                 #print("Device is offline!")
-    """
+        """
     def cmd_off(self, command):
         self.on = False
         self.setDriver("ST", 0)
