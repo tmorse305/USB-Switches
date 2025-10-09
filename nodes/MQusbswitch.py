@@ -3,7 +3,7 @@ mqtt-poly-pg3x NodeServer/Plugin for EISY/Polisy
 
 (C) 2024
 
-node MQswitch
+node MQusbswitch
 """
 
 import udi_interface
