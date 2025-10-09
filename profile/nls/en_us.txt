@@ -15,6 +15,14 @@ ST-SWITCH-ST-NAME = Status
 CMD-SWITCH-DON-NAME = On
 CMD-SWITCH-DOF-NAME = Off
 
+# usb switch
+ND-MQUSBSW-NAME = MQTT Switch
+ND-MQUSBSW-ICON = Switch
+ST-USBSWITCH-ST-NAME = Status
+
+CMD-USBSWITCH-DON-NAME = On
+CMD-USBSWITCH-DOF-NAME = Off
+
 # trigger
 ND-MQTG-NAME = Virtual Trigger
 ND-MQTG-ICON = Electricity
@@ -252,6 +260,7 @@ GLOCK-1 = Locked
 ONOFF-0 = Off
 ONOFF-1 = On
 ONOFF-100 = On
+
 
 
 
