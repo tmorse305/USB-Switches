@@ -76,9 +76,10 @@ class MQusbswitch(udi_interface.Node):
         
         @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')
         async def main(client: Client):
-            print(client.region)
-            print(client.user.info)
-            print(client.devices)
+            #print(client.region)
+            #print(client.user.info)
+            #print(client.devices)
+            LOGGER.debug("client *****:",{client.region})
 
             device =  client.get_device('100118f515') #Mickey's ID
             #print(device.params)
@@ -86,6 +87,7 @@ class MQusbswitch(udi_interface.Node):
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
 
             #print(device.state)
+            LOGGER.debug("state *****:",{device.state})
             #print(device.created_at)
             #print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             #print("Device online?", device.online)
