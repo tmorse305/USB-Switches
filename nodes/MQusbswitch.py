@@ -7,6 +7,8 @@ node MQusbswitch
 """
 
 import udi_interface
+import ewelink
+from ewelink import Client, DeviceOffline, Power
 
 LOGGER = udi_interface.LOGGER
 
@@ -68,11 +70,11 @@ class MQusbswitch(udi_interface.Node):
 
     def cmd_on(self, command):
         self.on = True
-        self.controller.mqtt_pub(self.cmd_topic, "ON")
+        #self.controller.mqtt_pub(self.cmd_topic, "ON")
 
     def cmd_off(self, command):
         self.on = False
-        self.controller.mqtt_pub(self.cmd_topic, "OFF")
+        #self.controller.mqtt_pub(self.cmd_topic, "OFF")
 
     def query(self, command=None):
         """
@@ -80,8 +82,8 @@ class MQusbswitch(udi_interface.Node):
             the parent class, so you don't need to override this method unless
             there is a need.
             """
-        self.controller.mqtt_pub(self.cmd_topic, "")
-        self.reportDrivers()
+        #self.controller.mqtt_pub(self.cmd_topic, "")
+        #self.reportDrivers()
 
     # all the drivers - for reference
     drivers = [
