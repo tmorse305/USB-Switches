@@ -70,7 +70,7 @@ class MQusbswitch(udi_interface.Node):
 
     def cmd_on(self, command):
         self.on = True
-        #self.setDriver("ST", 100)
+        self.setDriver("ST", 100)
         #self.controller.mqtt_pub(self.cmd_topic, "ON")
         
         @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')
@@ -98,6 +98,7 @@ class MQusbswitch(udi_interface.Node):
 
     def cmd_off(self, command):
         self.on = False
+        self.setDriver("ST", 0)
         #self.controller.mqtt_pub(self.cmd_topic, "OFF")
 
     def query(self, command=None):
