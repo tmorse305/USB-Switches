@@ -70,6 +70,7 @@ class MQusbswitch(udi_interface.Node):
 
     def cmd_on(self, command):
         self.on = True
+        self.reportCmd("DON")
         #self.controller.mqtt_pub(self.cmd_topic, "ON")
 
     def cmd_off(self, command):
