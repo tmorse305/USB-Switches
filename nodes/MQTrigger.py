@@ -76,7 +76,7 @@ class MQTrigger(udi_interface.Node):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",}        
         params = {"trigger": self.status_topic, "token": self.cmd_topic}
         LOGGER.debug(f"params: {params}")        
-        # hook_url = self.controller.getURL()
+        # example: https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php?trigger=0b59f758-cfdc-4b1a-b779-48cf1e96782f&token=1d4307c2-fc44-414a-9d5f-09c76aab7933&response=html
         encoded_url = f"{self.controller.getURL()}?{urllib3.request.urlencode(params)}"
         LOGGER.debug(f"URL: {encoded_url}")
         r = self.http.request('GET',encoded_url,headers=headers)
@@ -108,3 +108,4 @@ class MQTrigger(udi_interface.Node):
         "DON": cmd_on}
 
     hint = [4, 2, 0, 0]
+
