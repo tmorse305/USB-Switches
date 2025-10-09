@@ -7,6 +7,7 @@ node MQusbswitch
 """
 
 import udi_interface
+import aiohttp
 import ewelink
 from ewelink import Client, DeviceOffline, Power
 
