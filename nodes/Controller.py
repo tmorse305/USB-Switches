@@ -32,6 +32,7 @@ from nodes import MQs31
 from nodes import MQraw
 from nodes import MQRGBWstrip
 from nodes import MQratgdo
+from nodes import MQusbswitch
 
 """
 Some shortcuts for udi interface components
@@ -655,5 +656,6 @@ class Controller(udi_interface.Node):
         'DISCOVER': discover,
         'QUERY': query,
     }
+
 
 
