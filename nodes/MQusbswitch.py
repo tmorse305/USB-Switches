@@ -71,33 +71,33 @@ class MQusbswitch(udi_interface.Node):
 
     def cmd_on(self, command):
         self.on = True
-        self.setDriver("ST", 100)
+        #self.setDriver("ST", 100)
         #self.controller.mqtt_pub(self.cmd_topic, "ON")
         
         @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')
-        async def main(client: Client):
+        #async def main(client: Client):
             #print(client.region)
             #print(client.user.info)
             #print(client.devices)
-            LOGGER.debug("client *****:",{client.region})
+            #LOGGER.debug("client *****:",{client.region})
 
-            device =  client.get_device('100118f515') #Mickey's ID
+            #device =  client.get_device('100118f515') #Mickey's ID
             #print(device.params)
                 # Raw device specific properties
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
 
             #print(device.state)
-            LOGGER.debug("state *****:",{device.state})
+            #LOGGER.debug("state *****:",{device.state})
             #print(device.created_at)
             #print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             #print("Device online?", device.online)
 
-            try:
+           # try:
                 #await device.on()
-                await device.edit(Power.on[0])
-                print("Power on sent")
-            except DeviceOffline:
-                print("Device is offline!")
+                #await device.edit(Power.on[0])
+                #print("Power on sent")
+            #except DeviceOffline:
+                #print("Device is offline!")
 
     def cmd_off(self, command):
         self.on = False
