@@ -71,10 +71,11 @@ class MQusbswitch(udi_interface.Node):
 
     def cmd_on(self, command):
         self.on = True
-        #self.setDriver("ST", 100)
-        #self.controller.mqtt_pub(self.cmd_topic, "ON")
+        # self.setDriver("ST", 100)
+        # self.controller.mqtt_pub(self.cmd_topic, "ON")
         
         @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')
+    """
         #async def main(client: Client):
             #print(client.region)
             #print(client.user.info)
@@ -98,11 +99,11 @@ class MQusbswitch(udi_interface.Node):
                 #print("Power on sent")
             #except DeviceOffline:
                 #print("Device is offline!")
-
+    """
     def cmd_off(self, command):
         self.on = False
         self.setDriver("ST", 0)
-        #self.controller.mqtt_pub(self.cmd_topic, "OFF")
+        # self.controller.mqtt_pub(self.cmd_topic, "OFF")
 
     def query(self, command=None):
         """
@@ -110,8 +111,8 @@ class MQusbswitch(udi_interface.Node):
             the parent class, so you don't need to override this method unless
             there is a need.
             """
-        #self.controller.mqtt_pub(self.cmd_topic, "")
-        #self.reportDrivers()
+        # self.controller.mqtt_pub(self.cmd_topic, "")
+        # self.reportDrivers()
 
     # all the drivers - for reference
     drivers = [
