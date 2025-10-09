@@ -73,6 +73,8 @@ class Controller(udi_interface.Node):
         self.mqtt_port = 1884
         self.mqtt_user = 'admin'
         self.mqtt_password = 'admin'
+        self.ewelink_user = 'admin'
+        self.ewelink_pw = 'admin'
         self.webhook_url = "https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php"
         self.devlist = {}
         # e.g. [{'id': 'topic1', 'type': 'switch', 'status_topic': 'stat/topic1/power',
@@ -214,6 +216,8 @@ class Controller(udi_interface.Node):
         self.mqtt_port = int(self.Parameters["mqtt_port"] or 1884)
         self.mqtt_user = self.Parameters["mqtt_user"] or 'admin'
         self.mqtt_password = self.Parameters["mqtt_password"] or 'admin'
+        self.ewelink_pw = self.Parameters["ewelink_pw"] or 'admin'
+        self.ewelink_user = self.Parameters["ewelink_user"] or 'admin'
         self.webhook_url = self.Parameters["webhook_url"] or "https://www.virtualsmarthome.xyz/url_routine_trigger/activate.php"
 
         # upload the device topics yaml file (multiple devices)
@@ -345,6 +349,11 @@ class Controller(udi_interface.Node):
                 if dev["type"] == "switch":                    
                     LOGGER.info(f"Adding {dev['type']}, {name}")
                     self.poly.addNode(MQSwitch(self.poly, self.address, address, name, dev))
+                    self._add_status_topics(dev, [dev["status_topic"]])
+
+                elif dev["type"] == "usbsw":                    
+                    LOGGER.info(f"Adding {dev['type']}, {name}")
+                    self.poly.addNode(MQusbswitch(self.poly, self.address, address, name, dev))
                     self._add_status_topics(dev, [dev["status_topic"]])
                     
                 elif dev["type"] == "trigger":
@@ -656,6 +665,7 @@ class Controller(udi_interface.Node):
         'DISCOVER': discover,
         'QUERY': query,
     }
+
 
 
 
