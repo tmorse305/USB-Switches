@@ -9,6 +9,7 @@ node MQusbswitch
 import udi_interface
 import aiohttp
 import ewelink
+import asyncio
 from ewelink import Client, DeviceOffline, Power
 
 LOGGER = udi_interface.LOGGER
