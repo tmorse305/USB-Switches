@@ -75,7 +75,7 @@ class MQusbswitch(udi_interface.Node):
         # self.setDriver("ST", 100)
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
         
-        @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')                
+        @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')   # async not working becasue of no loop. Works stand aone in Pycharm             
         async def main(client: Client):
             print(client.region)
             print(client.user.info)
