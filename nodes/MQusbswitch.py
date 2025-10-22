@@ -80,7 +80,7 @@ class MQusbswitch(udi_interface.Node):
             print(client.region)
             print(client.user.info)
             print(client.devices)
-            LOGGER.debug("client *****:",{client.region})
+            #LOGGER.debug("client *****:",{client.region})
 
             device =  client.get_device('100118f515') #Mickey's ID
             print(device.params)
