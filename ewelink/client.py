@@ -91,9 +91,9 @@ class Client:
 def login(password: str, email: str | None = None, phone: str | int | None = None, *, region: str = 'us') -> Decorator[Client, V]:
         client: Client = Client(password, email, phone, region = region)
         #asyncio.get_event_loop().run_until_complete(client.login())
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        loop.run_until_complete(client.login())
+        loop0 = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop0)
+        loop0.run_until_complete(client.login())
         def decorator(f: Callable[[Client], Coroutine[None, Any, V]]) -> V:
             #result = asyncio.get_event_loop().run_until_complete(f(client))
             loop1 = asyncio.new_event_loop()
@@ -113,4 +113,5 @@ def login(password: str, email: str | None = None, phone: str | int | None = Non
             return result
 
         return decorator
+
 
