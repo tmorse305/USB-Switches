@@ -88,7 +88,7 @@ class MQusbswitch(udi_interface.Node):
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
 
             print(device.state)
-            LOGGER.debug("state *****:",{device.state})
+            #LOGGER.debug("state *****:",{device.state})
             print(device.created_at)
             print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             print("Device online?", device.online)
