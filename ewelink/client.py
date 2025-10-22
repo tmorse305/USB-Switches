@@ -90,7 +90,10 @@ class Client:
 
 def login(password: str, email: str | None = None, phone: str | int | None = None, *, region: str = 'us') -> Decorator[Client, V]:
         client: Client = Client(password, email, phone, region = region)
-        asyncio.get_event_loop().run_until_complete(client.login())
+        #asyncio.get_event_loop().run_until_complete(client.login())
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(client.login())
         def decorator(f: Callable[[Client], Coroutine[None, Any, V]]) -> V:
             result = asyncio.get_event_loop().run_until_complete(f(client))
             if not client.http.session.closed:
@@ -99,4 +102,5 @@ def login(password: str, email: str | None = None, phone: str | int | None = Non
                 if not client.ws.closed:
                     asyncio.get_event_loop().run_until_complete(client.ws.close())
             return result
+
         return decorator
