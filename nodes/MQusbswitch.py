@@ -75,7 +75,7 @@ class MQusbswitch(udi_interface.Node):
         # self.setDriver("ST", 100)
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
         
-        @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')   # async not working becasue of no loop. Works stand aone in Pycharm             
+        @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')       
         async def main(client: Client):
             print(client.region)
             print(client.user.info)
@@ -99,6 +99,7 @@ class MQusbswitch(udi_interface.Node):
                 print("Power on sent")
             except DeviceOffline:
                 print("Device is offline!")
+            print(device.state)
         
     def cmd_off(self, command):
         self.on = False
