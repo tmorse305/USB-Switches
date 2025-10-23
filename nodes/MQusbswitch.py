@@ -71,9 +71,9 @@ class MQusbswitch(udi_interface.Node):
             LOGGER.error("Invalid payload {}".format(payload))
             
     def cmd_on(self, command):
-        self.on = True
-        self.setDriver("ST", 100)
         self.reportCmd("DON")
+        self.on = True
+        self.setDriver("ST", 100)        
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
         
         @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')       
