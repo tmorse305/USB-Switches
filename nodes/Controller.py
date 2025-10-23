@@ -316,6 +316,12 @@ class Controller(udi_interface.Node):
     def getURL(self): # passing webhook url to MQTrigger node **************
         return self.webhook_url
 
+     def getUSBUSR(self): # passing ewelink user to  MQusbswitch node **************
+        return self.ewelink_user
+
+    def getUSBPW(self): # passing ewelink user to  MQusbswitch node **************
+        return self.ewelink_pw
+
     def discover(self, command = None):
         """
         Do discovery here. Called from controller start method
@@ -666,6 +672,7 @@ class Controller(udi_interface.Node):
         'DISCOVER': discover,
         'QUERY': query,
     }
+
 
 
 
