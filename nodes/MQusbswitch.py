@@ -115,7 +115,7 @@ class MQusbswitch(udi_interface.Node):
             print(client.devices)
             #LOGGER.debug("client *****:",{client.region})
 
-            device =  client.get_device('100118f515') #Mickey's ID
+            device =  client.get_device(self.cmd_topic) #Mickey's ID
             print(device.params)
                 # Raw device specific properties
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
