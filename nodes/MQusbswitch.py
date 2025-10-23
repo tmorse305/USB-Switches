@@ -108,7 +108,7 @@ class MQusbswitch(udi_interface.Node):
         self.setDriver("ST", 0)
         # self.controller.mqtt_pub(self.cmd_topic, "OFF")
 
-        @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net')       
+        @ewelink.login(self.controller.GETPW(),self.controller.GETUSER())       
         async def main(client: Client):
             print(client.region)
             print(client.user.info)
