@@ -76,7 +76,7 @@ class MQusbswitch(udi_interface.Node):
         self.setDriver("ST", 100)        
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
         call_dev('on')
-        LOGGER.info ("cmd on ******": {usb_sw_state})
+        LOGGER.info ("cmd on ******",usb_sw_state)
 
     def cmd_off(self, command):
         #self.reportCmd("DOF")
@@ -84,7 +84,7 @@ class MQusbswitch(udi_interface.Node):
         self.setDriver("ST", 0)
         # self.controller.mqtt_pub(self.cmd_topic, "OFF")
         call_dev('off')        
-        LOGGER.info ("cmd off ******": {usb_sw_state})
+        LOGGER.info ("cmd off ******",usb_sw_state)
         
     def call_dev(action):
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
