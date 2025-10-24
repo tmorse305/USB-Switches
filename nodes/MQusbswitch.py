@@ -75,64 +75,43 @@ class MQusbswitch(udi_interface.Node):
         self.on = True
         self.setDriver("ST", 100)        
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
-        
-        @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())         
-        async def main(client: Client):
-            print(client.region)
-            print(client.user.info)
-            print(client.devices)
-            #LOGGER.debug("client *****:",{client.region})
+        call_dev('on')
+        print (f('cmd on ******': {usb_sw_state})
 
-            device =  client.get_device('100118f515') #Mickey's ID
-            print(device.params)
-                # Raw device specific properties
-                # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
-
-            print(device.state)
-            #LOGGER.debug("state *****:",{device.state})
-            print(device.created_at)
-            print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
-            print("Device online?", device.online)
-
-            try:
-                # await device.on()
-                await device.edit(Power.on[0])
-                print("Power on sent")
-            except DeviceOffline:
-                print("Device is offline!")
-            print(device.state)
-        
     def cmd_off(self, command):
         #self.reportCmd("DOF")
         self.on = False
         self.setDriver("ST", 0)
         # self.controller.mqtt_pub(self.cmd_topic, "OFF")
-
+        call_dev('off')        
+        print (f('cmd off ******': {usb_sw_state})
+        
+    def call_dev(action):
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
         async def main(client: Client):
             print(client.region)
             print(client.user.info)
             print(client.devices)
-            #LOGGER.debug("client *****:",{client.region})
-
-            device =  client.get_device(self.cmd_topic) #Mickey's ID
+                
+            device =  client.get_device(self.cmd_topic) #sonoff switch ID
+            global usb_sw_state
             print(device.params)
                 # Raw device specific properties
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
-
-            print(device.state)
-            #LOGGER.debug("state *****:",{device.state})
+    
+            print(device.state)            
             print(device.created_at)
             print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             print("Device online?", device.online)
-
-            try:
-                # await device.on()
-                await device.edit(Power.off[0])
-                print("Power on sent")
-            except DeviceOffline:
-                print("Device is offline!")
-            print(device.state)
+            usb_sw_state = device.state
+            if action != 'stay':
+                try:
+                    # await device.on()
+                    await device.edit(Power.off[0])
+                    print("Power on sent")
+                except DeviceOffline:
+                    print("Device is offline!")
+                print(device.state)
 
     def query(self, command=None):
         """
