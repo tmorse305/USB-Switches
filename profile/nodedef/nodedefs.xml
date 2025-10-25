@@ -37,6 +37,7 @@
         <editors />
         <sts>
             <st id="ST" editor="ONOFF" />
+			<st id="GV1" editor="STATUS" />
         </sts>
         <cmds>
             <sends>
@@ -351,6 +352,7 @@
         </cmds>
     </nodeDef>
 </nodeDefs>
+
 
 
 
