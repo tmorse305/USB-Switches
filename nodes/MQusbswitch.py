@@ -103,7 +103,7 @@ class MQusbswitch(udi_interface.Node):
         self.on = True
         self.setDriver("ST", 100)        
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
-        call_dev('on')
+        self.call_dev('on')
         LOGGER.info ("cmd on ******",usb_sw_state)
 
     def cmd_off(self, command):
@@ -111,7 +111,7 @@ class MQusbswitch(udi_interface.Node):
         self.on = False
         self.setDriver("ST", 0)
         # self.controller.mqtt_pub(self.cmd_topic, "OFF")
-        call_dev('off')        
+        self.call_dev('off')        
         LOGGER.info ("cmd off ******",usb_sw_state)      
     
     def query(self, command=None):
