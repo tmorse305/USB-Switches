@@ -1,3 +1,6 @@
+import ewelink
+from ewelink import Client, DeviceOffline, Power
+
 def call_dev(action, dev_id):
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
         async def main(client: Client):
@@ -24,3 +27,4 @@ def call_dev(action, dev_id):
                 except DeviceOffline:
                     print("Device is offline!")
                 print(device.state)
+
