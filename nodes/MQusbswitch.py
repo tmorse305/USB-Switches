@@ -104,7 +104,7 @@ class MQusbswitch(udi_interface.Node):
         self.on = True
         self.setDriver("ST", 100)        
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
-        self.call_dev('on')
+        MQusbswitch.call_dev('on')
         LOGGER.info ("cmd on ******",usb_sw_state)
 
     def cmd_off(self, command):
