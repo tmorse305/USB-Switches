@@ -70,34 +70,7 @@ class MQusbswitch(udi_interface.Node):
             self.setDriver("ST", 0)
         else:
             LOGGER.error("Invalid payload {}".format(payload))
-
-    def call_dev(action,USBPW,USBUSR,CMD):
-        @ewelink.login(USBPW,USBUSR)       
-        async def main(client: Client):
-            print(client.region)
-            print(client.user.info)
-            print(client.devices)
-            print(client.devices)
-                
-            device =  client.get_device(CMD) #sonoff switch ID
-            global usb_sw_state
-            print(device.params)
-                # Raw device specific properties
-                # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
-    
-            print(device.state)            
-            print(device.created_at)
-            print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
-            print("Device online?", device.online)
-            usb_sw_state = device.state
-            if action != 'stay':
-                try:
-                    # await device.on()
-                    await device.edit(Power.off[0])
-                    print("Power on sent")
-                except DeviceOffline:
-                    print("Device is offline!")
-               
+ 
                 
     def cmd_on(self, command):
         #self.reportCmd("DON")
@@ -122,13 +95,13 @@ class MQusbswitch(udi_interface.Node):
             print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             print("Device online?", device.online)
             usb_sw_state = device.state
-            if action != 'stay':
-                try:
-                    # await device.on()
-                    await device.edit(Power.on[0])
-                    print("Power on sent")
-                except DeviceOffline:
-                    print("Device is offline!")
+            
+            try:
+                # await device.on()
+                await device.edit(Power.on[0])
+                print("Power on sent")
+            except DeviceOffline:
+                print("Device is offline!")
 
     def cmd_off(self, command):
         #self.reportCmd("DOF")
@@ -153,14 +126,14 @@ class MQusbswitch(udi_interface.Node):
             print(device.created_at)
             print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             print("Device online?", device.online)
-            usb_sw_state = device.state
-            if action != 'stay':
-                try:
-                    # await device.on()
-                    await device.edit(Power.off[0])
-                    print("Power on sent")
-                except DeviceOffline:
-                    print("Device is offline!")     
+            usb_sw_state = device.state   
+            
+            try:
+                # await device.on()
+                await device.edit(Power.off[0])
+                print("Power on sent")
+            except DeviceOffline:
+                print("Device is offline!")     
     
     def query(self, command=None):
         """
