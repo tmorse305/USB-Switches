@@ -44,8 +44,7 @@
 	    	<cmd id="DON" />
 	    	<cmd id="DOF" />
             </sends>
-            <accepts>
-                <cmd id="QUERY" />
+            <accepts>                
                 <cmd id="DON" />
                 <cmd id="DOF" />
             </accepts>
@@ -352,6 +351,7 @@
         </cmds>
     </nodeDef>
 </nodeDefs>
+
 
 
 
