@@ -77,6 +77,7 @@ class MQusbswitch(udi_interface.Node):
             print(client.region)
             print(client.user.info)
             print(client.devices)
+            print(client.devices)
                 
             device =  client.get_device(self.cmd_topic) #sonoff switch ID
             global usb_sw_state
