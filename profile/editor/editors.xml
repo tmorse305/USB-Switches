@@ -18,7 +18,7 @@
         <range uom="25" subset="0,1,2" nls="SERVER" />
     </editor>
 	<editor id="STATUS">
-        <range uom="25" subset="0,1" nls="SERVER" />
+        <range uom="25" subset="0,1" nls="STATUS" />
     </editor>
     <editor id="HUM">
         <range uom="22" min="0" max="100" prec="2" />
@@ -90,6 +90,7 @@
         <range uom="2" subset="0,1" nls="GOBST" />
     </editor>
 </editors>
+
 
 
 
