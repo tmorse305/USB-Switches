@@ -10,7 +10,7 @@ import udi_interface
 import aiohttp
 import ewelink
 import asyncio
-from ewelink import Client, DeviceOffline, Power
+from ewelink import Client, DeviceOffline, Power, dev_call
 
 LOGGER = udi_interface.LOGGER
 
