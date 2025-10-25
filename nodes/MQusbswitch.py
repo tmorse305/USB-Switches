@@ -71,15 +71,15 @@ class MQusbswitch(udi_interface.Node):
         else:
             LOGGER.error("Invalid payload {}".format(payload))
 
-    def call_dev(action):
-        @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
+    def call_dev(action,USBPW,USBUSR,CMD):
+        @ewelink.login(USBPW,USBUSR)       
         async def main(client: Client):
             print(client.region)
             print(client.user.info)
             print(client.devices)
             print(client.devices)
                 
-            device =  client.get_device(self.cmd_topic) #sonoff switch ID
+            device =  client.get_device(CMD) #sonoff switch ID
             global usb_sw_state
             print(device.params)
                 # Raw device specific properties
@@ -104,7 +104,7 @@ class MQusbswitch(udi_interface.Node):
         self.on = True
         self.setDriver("ST", 100)        
         # self.controller.mqtt_pub(self.cmd_topic, "ON")
-        MQusbswitch.call_dev('on')
+        MQusbswitch.call_dev('on',self.controller.getUSBPW(),self.controller.getUSBUSR(),self.cmd_topic)
         LOGGER.info ("cmd on ******",usb_sw_state)
 
     def cmd_off(self, command):
