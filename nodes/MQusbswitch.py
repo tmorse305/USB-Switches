@@ -90,10 +90,11 @@ class MQusbswitch(udi_interface.Node):
                 # Raw device specific properties
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
     
-            print(device.state)            
+            print(device.state)                
             print(device.created_at)
             print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             print("Device online?", device.online)
+            print (type(device.online))
             #usb_sw_state = device.state
             
             try:
