@@ -85,7 +85,7 @@ class MQusbswitch(udi_interface.Node):
             print(client.devices)
                 
             device =  client.get_device(self.cmd_topic) #sonoff switch ID
-            global usb_sw_state
+            #global usb_sw_state
             print(device.params)
                 # Raw device specific properties
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
@@ -94,7 +94,7 @@ class MQusbswitch(udi_interface.Node):
             print(device.created_at)
             print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             print("Device online?", device.online)
-            usb_sw_state = device.state
+            #usb_sw_state = device.state
             
             try:
                 # await device.on()
@@ -117,7 +117,7 @@ class MQusbswitch(udi_interface.Node):
             print(client.devices)
                 
             device =  client.get_device(self.cmd_topic) #sonoff switch ID
-            global usb_sw_state
+            #global usb_sw_state
             print(device.params)
                 # Raw device specific properties
                 # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
@@ -126,7 +126,7 @@ class MQusbswitch(udi_interface.Node):
             print(device.created_at)
             print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
             print("Device online?", device.online)
-            usb_sw_state = device.state   
+            #usb_sw_state = device.state   
             
             try:
                 # await device.on()
@@ -147,7 +147,8 @@ class MQusbswitch(udi_interface.Node):
 
     # all the drivers - for reference
     drivers = [
-        {"driver": "ST", "value": 0, "uom": 78, "name": "Power"}
+        {"driver": "ST", "value": 0, "uom": 78, "name": "Power"},
+        {"driver": "GV1", "value": 0, "uom": 25}
     ]
 
     """
