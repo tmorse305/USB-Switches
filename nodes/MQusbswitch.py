@@ -78,25 +78,10 @@ class MQusbswitch(udi_interface.Node):
         self.setDriver("ST", 100)        
        
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
-        async def main(client: Client):
-            print(client.region)
-            print(client.user.info)
-            print(client.devices)
-            print(client.devices)
-                
+        async def main(client: Client):           
             device =  client.get_device(self.cmd_topic) #sonoff switch ID
-            #global usb_sw_state
-            print(device.params)
-                # Raw device specific properties
-                # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
-    
-            print(device.state)                
-            print(device.created_at)
-            print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
-            print("Device online?", device.online)
-            print (type(device.online))
-            #usb_sw_state = device.state
-            
+            #global usb_sw_state            
+            #usb_sw_state = device.state            
             try:
                 # await device.on()
                 await device.edit(Power.on[0])
@@ -116,30 +101,21 @@ class MQusbswitch(udi_interface.Node):
         # self.controller.mqtt_pub(self.cmd_topic, "OFF")
         
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
-        async def main(client: Client):
-            print(client.region)
-            print(client.user.info)
-            print(client.devices)
-            print(client.devices)
-                
+        async def main(client: Client):           
             device =  client.get_device(self.cmd_topic) #sonoff switch ID
-            #global usb_sw_state
-            print(device.params)
-                # Raw device specific properties
-                # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
-    
-            print(device.state)            
-            print(device.created_at)
-            print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
-            print("Device online?", device.online)
-            #usb_sw_state = device.state   
-            
+            #global usb_sw_state            
+            #usb_sw_state = device.state            
             try:
                 # await device.on()
                 await device.edit(Power.off[0])
                 print("Power on sent")
             except DeviceOffline:
-                print("Device is offline!")     
+                print("Device is offline!")
+            if device.online == True:
+                value = 1
+            else:
+                value = 0
+            self.setDriver("GV1", value)     
     
     def query(self, command=None):
         """
