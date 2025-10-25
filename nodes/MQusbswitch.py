@@ -102,7 +102,9 @@ class MQusbswitch(udi_interface.Node):
                 print("Power on sent")
             except DeviceOffline:
                 print("Device is offline!")
-            value = 0
+            if device.online == 'True'
+                value = 1
+            else value = 0
             self.setDriver("GV1", value) 
 
     def cmd_off(self, command):
