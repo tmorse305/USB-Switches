@@ -10,7 +10,7 @@ import udi_interface
 import aiohttp
 import ewelink
 import asyncio
-from ewelink import Client, DeviceOffline, Power, Example
+from ewelink import Client, DeviceOffline, Power
 
 
 LOGGER = udi_interface.LOGGER
@@ -70,23 +70,7 @@ class MQusbswitch(udi_interface.Node):
             self.setDriver("ST", 0)
         else:
             LOGGER.error("Invalid payload {}".format(payload))
-            
-    def cmd_on(self, command):
-        #self.reportCmd("DON")
-        self.on = True
-        self.setDriver("ST", 100)        
-        # self.controller.mqtt_pub(self.cmd_topic, "ON")
-        call_dev('on')
-        LOGGER.info ("cmd on ******",usb_sw_state)
 
-    def cmd_off(self, command):
-        #self.reportCmd("DOF")
-        self.on = False
-        self.setDriver("ST", 0)
-        # self.controller.mqtt_pub(self.cmd_topic, "OFF")
-        call_dev('off')        
-        LOGGER.info ("cmd off ******",usb_sw_state)
-        
     def call_dev(action):
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
         async def main(client: Client):
@@ -113,7 +97,23 @@ class MQusbswitch(udi_interface.Node):
                 except DeviceOffline:
                     print("Device is offline!")
                 print(device.state)
+                
+    def cmd_on(self, command):
+        #self.reportCmd("DON")
+        self.on = True
+        self.setDriver("ST", 100)        
+        # self.controller.mqtt_pub(self.cmd_topic, "ON")
+        call_dev('on')
+        LOGGER.info ("cmd on ******",usb_sw_state)
 
+    def cmd_off(self, command):
+        #self.reportCmd("DOF")
+        self.on = False
+        self.setDriver("ST", 0)
+        # self.controller.mqtt_pub(self.cmd_topic, "OFF")
+        call_dev('off')        
+        LOGGER.info ("cmd off ******",usb_sw_state)      
+    
     def query(self, command=None):
         """
             Called by ISY to report all drivers for this node. This is done in
