@@ -69,30 +69,22 @@ class MQusbswitch(udi_interface.Node):
                 self.on = False
             self.setDriver("ST", 0)
         else:
-            LOGGER.error("Invalid payload {}".format(payload))
- 
-                
-    def cmd_on(self, command):
-        #self.reportCmd("DON")
-        self.on = True
-        self.setDriver("ST", 100)
-        Sonoff_Main("on",0)
-
-    def cmd_off(self, command):
-        #self.reportCmd("DOF")
-        self.on = False
-        self.setDriver("ST", 0)
-        Sonoff_Main("off",0)
-       
-    def query(self, command=None):
-        """
-            Called by ISY to report all drivers for this node. This is done in
-            the parent class, so you don't need to override this method unless
-            there is a need.
-            """
-        # self.controller.mqtt_pub(self.cmd_topic, "")
-        # self.reportDrivers()
+            LOGGER.error("Invalid payload {}".format(payload)) 
+            
+    async def cancel_ping_poll_tasks():
+        current_task = asyncio.current_task()
+        tasks = [t for t in asyncio.all_tasks() if t is not current_task]
+        for task in tasks:
+            if task.get_name() == "ping_task" and not task.done():
+                #print("Cancelling task",task)
+                task.cancel()
+            if task.get_name() == "poll_task" and not task.done():
+                #print("Cancelling task",task)
+                task.cancel()
     
+        # Wait for all tasks to finish (handle cancellation)
+        await asyncio.gather(*tasks, return_exceptions=True)
+        
     def Sonoff_Main(pstate,device_num):
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR()) #the function (main) is not wrapped in decorator code so it will execute immediately
         async def main(client):   # client: Client is a hint that client is expected to be type Client
@@ -121,20 +113,27 @@ class MQusbswitch(udi_interface.Node):
                 print("Device is offline!")
                 usb_sw_state = "offline"
                 await cancel_ping_poll_tasks()
-
-    async def cancel_ping_poll_tasks():
-        current_task = asyncio.current_task()
-        tasks = [t for t in asyncio.all_tasks() if t is not current_task]
-        for task in tasks:
-            if task.get_name() == "ping_task" and not task.done():
-                #print("Cancelling task",task)
-                task.cancel()
-            if task.get_name() == "poll_task" and not task.done():
-                #print("Cancelling task",task)
-                task.cancel()
     
-        # Wait for all tasks to finish (handle cancellation)
-        await asyncio.gather(*tasks, return_exceptions=True)
+    def cmd_on(self, command):
+        #self.reportCmd("DON")
+        self.on = True
+        self.setDriver("ST", 100)
+        Sonoff_Main("on",0)
+
+    def cmd_off(self, command):
+        #self.reportCmd("DOF")
+        self.on = False
+        self.setDriver("ST", 0)
+        Sonoff_Main("off",0)
+       
+    def query(self, command=None):
+        """
+            Called by ISY to report all drivers for this node. This is done in
+            the parent class, so you don't need to override this method unless
+            there is a need.
+            """
+        # self.controller.mqtt_pub(self.cmd_topic, "")
+        # self.reportDrivers()
    
 
     # all the drivers - for reference
