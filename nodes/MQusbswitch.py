@@ -75,31 +75,15 @@ class MQusbswitch(udi_interface.Node):
     def cmd_on(self, command):
         #self.reportCmd("DON")
         self.on = True
-        self.setDriver("ST", 100)        
-       
-        @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
-        async def main(client: Client):           
-            device =  client.get_device(self.cmd_topic) #sonoff switch ID
-            global usb_sw_state            
-            usb_sw_state = device.state            
-            try:
-                # await device.on()
-                await device.edit(Power.on[0])
-                print("Power on sent")
-            except DeviceOffline:
-                print("Device is offline!")
-            if device.online == True:
-                value = 1
-            else:
-                value = 0
-            self.setDriver("GV1", value) 
+        self.setDriver("ST", 100)
+        Sonoff_Main("on",0)
 
     def cmd_off(self, command):
         #self.reportCmd("DOF")
         self.on = False
         self.setDriver("ST", 0)
-        # self.controller.mqtt_pub(self.cmd_topic, "OFF")
-        
+        Sonoff_Main("off",0)
+        """
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
         async def main(client: Client):           
             device =  client.get_device(self.cmd_topic) #sonoff switch ID
@@ -116,7 +100,7 @@ class MQusbswitch(udi_interface.Node):
             else:
                 value = 0
             self.setDriver("GV1", value)     
-    
+            """
     def query(self, command=None):
         """
             Called by ISY to report all drivers for this node. This is done in
@@ -127,25 +111,12 @@ class MQusbswitch(udi_interface.Node):
         # self.reportDrivers()
     
     def Sonoff_Main(pstate,device_num):
-        @ewelink.login('Tea4twoA@eWL','tmorse305@comcast.net') #the function (main) is not wrapped in decorator code so it will execute immediately
+        @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR()) #the function (main) is not wrapped in decorator code so it will execute immediately
         async def main(client):   # client: Client is a hint that client is expected to be type Client
-            #print(client.region)
-            #print(client.user.info)
-            #print(client.devices)
-            #print ("back from login")
-            #dev_id ='100118f515'  # Mickey's ID
-            device =  client.get_device(dev_id)
-    
-            #print(device.params)
-            # Raw device specific properties
-            # can be accessed easily like: device.params.switch or device.params['startup'] (a subclass of dict)
+            device =  client.get_device(self.cmd_topic) #sonoff switch ID           
             global usb_sw_state
             usb_sw_state = device.state
-            #print(device.state)
-            #print(device.created_at)
-            #print("Brand Name:", device.brand.name, "Logo URL:", device.brand.logo.url)
-            #print("Device online?", device.online)
-    
+           
             try:
                 #await device.on()
                 obj = Power
@@ -157,17 +128,16 @@ class MQusbswitch(udi_interface.Node):
                 await device.edit(method[device_num])  # Change from 0 to 1 to trigger update but no change
                 #print(f"Command sent",{method})
                 await cancel_ping_poll_tasks()
-                #tasks = asyncio.all_tasks()
-               # print("after", tasks)
-               # print(len(tasks))
+                if device.online == True:
+                    value = 1
+                else:
+                    value = 0
+                self.setDriver("GV1", value)  
     
             except DeviceOffline:
                 print("Device is offline!")
-                sw_state = "offline"
+                usb_sw_state = "offline"
                 await cancel_ping_poll_tasks()
-
-
-
 
     async def cancel_ping_poll_tasks():
         current_task = asyncio.current_task()
