@@ -83,24 +83,7 @@ class MQusbswitch(udi_interface.Node):
         self.on = False
         self.setDriver("ST", 0)
         Sonoff_Main("off",0)
-        """
-        @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR())       
-        async def main(client: Client):           
-            device =  client.get_device(self.cmd_topic) #sonoff switch ID
-            #global usb_sw_state            
-            #usb_sw_state = device.state            
-            try:
-                # await device.on()
-                await device.edit(Power.off[0])
-                print("Power on sent")
-            except DeviceOffline:
-                print("Device is offline!")
-            if device.online == True:
-                value = 1
-            else:
-                value = 0
-            self.setDriver("GV1", value)     
-            """
+       
     def query(self, command=None):
         """
             Called by ISY to report all drivers for this node. This is done in
