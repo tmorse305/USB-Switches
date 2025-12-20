@@ -103,11 +103,11 @@ class MQusbswitch(udi_interface.Node):
                 await device.edit(method[device_num])  # Change from 0 to 1 to trigger update but no change
                 #print(f"Command sent",{method})
                 await self.cancel_ping_poll_tasks()
-                if device.online == True:
-                    value = 1
-                else:
-                    value = 0
-                self.setDriver("GV1", value)  
+                #if device.online == True:
+                    #value = 1
+                #else:
+                    #value = 0
+                #self.setDriver("GV1", value)  
     
             except DeviceOffline:
                 print("Device is offline!")
@@ -119,6 +119,12 @@ class MQusbswitch(udi_interface.Node):
         self.on = True
         self.setDriver("ST", 100)
         self.Sonoff_Main("on",0)
+        self.Sonoff_Main("on",1)
+        if usb_sw_state == "offline":
+            value = 0
+        else:
+            value = 1
+        self.setDriver("GV1", value)
 
     def cmd_off(self, command):
         #self.reportCmd("DOF")
