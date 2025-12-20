@@ -85,7 +85,7 @@ class MQusbswitch(udi_interface.Node):
         # Wait for all tasks to finish (handle cancellation)
         await asyncio.gather(*tasks, return_exceptions=True)
         
-    def Sonoff_Main(pstate,device_num):
+    def Sonoff_Main(self,pstate,device_num):
         @ewelink.login(self.controller.getUSBPW(),self.controller.getUSBUSR()) #the function (main) is not wrapped in decorator code so it will execute immediately
         async def main(client):   # client: Client is a hint that client is expected to be type Client
             device =  client.get_device(self.cmd_topic) #sonoff switch ID           
