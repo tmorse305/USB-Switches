@@ -118,13 +118,13 @@ class MQusbswitch(udi_interface.Node):
         #self.reportCmd("DON")
         self.on = True
         self.setDriver("ST", 100)
-        Sonoff_Main("on",0)
+        self.Sonoff_Main("on",0)
 
     def cmd_off(self, command):
         #self.reportCmd("DOF")
         self.on = False
         self.setDriver("ST", 0)
-        Sonoff_Main("off",0)
+        self.Sonoff_Main("off",0)
        
     def query(self, command=None):
         """
