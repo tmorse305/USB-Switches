@@ -119,7 +119,7 @@ class MQusbswitch(udi_interface.Node):
         self.on = True
         self.setDriver("ST", 100)
         self.Sonoff_Main("on",0)
-        self.Sonoff_Main("on",1)
+        self.Sonoff_Main("on",1) # query without changing the state
         if usb_sw_state == "offline":
             value = 0
         else:
@@ -131,6 +131,12 @@ class MQusbswitch(udi_interface.Node):
         self.on = False
         self.setDriver("ST", 0)
         self.Sonoff_Main("off",0)
+         self.Sonoff_Main("off",1) # query without changing the state
+        if usb_sw_state == "offline":
+            value = 0
+        else:
+            value = 1
+        self.setDriver("GV1", value)
        
     def query(self, command=None):
         """
