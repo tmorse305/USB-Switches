@@ -66,7 +66,7 @@ class WebSocketClient:
                     if hb_interval := response['config'].get('hbInterval', ''):
                         if type(hb_interval) == int: self.heartbeat = hb_interval + 7
         self._ping_task = self.http.loop.create_task(self.ping_hb(),name = "ping_task")
-        self._poll_task = self.http.loop.create_task(self.poll_event(),name = poll_task)
+        self._poll_task = self.http.loop.create_task(self.poll_event(),name = "poll_task")
 
     async def update_device_status(self, deviceid: str, **kwargs: list[dict[str, AnyStr]] | AnyStr) -> Response:
         fut: asyncio.Future[Response] = self.http.loop.create_future()
@@ -119,3 +119,4 @@ class WebSocketClient:
     def closed(self) -> bool:
 
         return self.ws.closed
+
