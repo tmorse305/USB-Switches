@@ -71,7 +71,7 @@ class MQusbswitch(udi_interface.Node):
         else:
             LOGGER.error("Invalid payload {}".format(payload)) 
             
-    async def cancel_ping_poll_tasks():
+    async def cancel_ping_poll_tasks(self):
         current_task = asyncio.current_task()
         tasks = [t for t in asyncio.all_tasks() if t is not current_task]
         for task in tasks:
