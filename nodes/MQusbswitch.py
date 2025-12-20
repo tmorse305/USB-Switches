@@ -102,7 +102,7 @@ class MQusbswitch(udi_interface.Node):
                 #print(len(tasks))
                 await device.edit(method[device_num])  # Change from 0 to 1 to trigger update but no change
                 #print(f"Command sent",{method})
-                await cancel_ping_poll_tasks()
+                await self.cancel_ping_poll_tasks()
                 if device.online == True:
                     value = 1
                 else:
@@ -112,7 +112,7 @@ class MQusbswitch(udi_interface.Node):
             except DeviceOffline:
                 print("Device is offline!")
                 usb_sw_state = "offline"
-                await cancel_ping_poll_tasks()
+                await self.cancel_ping_poll_tasks()
     
     def cmd_on(self, command):
         #self.reportCmd("DON")
