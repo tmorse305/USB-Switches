@@ -146,7 +146,7 @@ class MQusbswitch(udi_interface.Node):
             """
         # self.controller.mqtt_pub(self.cmd_topic, "")
         # self.reportDrivers()
-         self.Sonoff_Main("off",1) # query without changing the state
+        self.Sonoff_Main("off",1) # query without changing the state
         if usb_sw_state == "offline":
             value = 0
         else:
