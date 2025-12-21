@@ -223,6 +223,7 @@ class Controller(udi_interface.Node):
 
         # upload the device topics yaml file (multiple devices)
         if self.Parameters["devfile"] is not None:
+            print ("devfile",devfile)
             try:
                 x = self.Parameters["devfile"]
                 f = open(x)
@@ -672,6 +673,7 @@ class Controller(udi_interface.Node):
         'DISCOVER': discover,
         'QUERY': query,
     }
+
 
 
 
