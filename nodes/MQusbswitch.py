@@ -152,7 +152,22 @@ class MQusbswitch(udi_interface.Node):
         else:
             value = 1
         self.setDriver("GV1", value)
-   
+
+    def poll(self, polltype):
+        """
+        This method is called at the poll intervals per the POLL event
+        subscription during init.
+        """
+
+        if 'longPoll' in polltype:
+            LOGGER.debug('longPoll (node)')
+        else:
+            LOGGER.debug('shortPoll (node)')
+            if int(self.getDriver('ST')) == 1:
+                self.setDriver('ST',0)
+            else:
+                self.setDriver('ST',1)
+            LOGGER.debug('%s: get ST=%s',self.lpfx,self.getDriver('ST'))
 
     # all the drivers - for reference
     drivers = [
