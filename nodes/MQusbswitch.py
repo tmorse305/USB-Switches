@@ -160,14 +160,10 @@ class MQusbswitch(udi_interface.Node):
         """
 
         if 'longPoll' in polltype:
-            LOGGER.debug('longPoll (node)')
+            LOGGER.debug('USB longPoll (node)')
         else:
-            LOGGER.debug('shortPoll (node)')
-            if int(self.getDriver('ST')) == 1:
-                self.setDriver('ST',0)
-            else:
-                self.setDriver('ST',1)
-            LOGGER.debug('%s: get ST=%s',self.lpfx,self.getDriver('ST'))
+            LOGGER.debug('USB shortPoll (node)')
+            
 
     # all the drivers - for reference
     drivers = [
