@@ -287,14 +287,14 @@ class Controller(udi_interface.Node):
 
     Use this if you want your node server to do something at fixed
     intervals.
-    """
+    
     def poll(self, flag):
         if 'longPoll' in flag:
             LOGGER.debug('longPoll re-parse updateallfromserver (controller)')
         else:
             self.heartbeat()
             LOGGER.debug('shortPoll check for events (controller)')
-
+    """
     def query(self, command = None):
         """
         The query method will be called when the ISY attempts to query the
@@ -673,6 +673,7 @@ class Controller(udi_interface.Node):
         'DISCOVER': discover,
         'QUERY': query,
     }
+
 
 
 
